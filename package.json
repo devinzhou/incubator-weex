@@ -86,6 +86,7 @@
     "weex-vue-framework": "2.5.13-weex.5"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.2",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.2.1",
     "babel-istanbul": "^0.11.0",
@@ -110,6 +111,8 @@
     "mocha-simple-html-reporter": "^1.0.1",
     "parse-diff": "^0.4.0",
     "phantomjs-prebuilt": "^2.1.7",
+    "postcss-plugin-px2rem": "^0.8.1",
+    "postcss-plugin-weex": "^0.1.7",
     "reify": "^0.3.8",
     "rollup": "^0.53.2",
     "rollup-plugin-buble": "^0.18.0",
@@ -134,7 +137,8 @@
     "weex-gcanvas": "^0.4.2",
     "weex-loader": "^0.5.3",
     "weex-vdom-tester": "^0.2.0",
-    "weex-vue-render": "^1.0.24",
+    "weex-vue-precompiler": "^0.1.25",
+    "weex-vue-render": "^0.12.32",
     "weex-wd": "^1.0.23",
     "xmldom": "^0.1.27"
   }
