@@ -53,7 +53,7 @@ public class IndexActivity extends AbstractWeexActivity {
   private static final String TAG = "IndexActivity";
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 0x1;
   private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 0x2;
-  private static final String DEFAULT_IP = "your_current_IP";
+  private static final String DEFAULT_IP = "localhost";
   private static String sCurrentIp = DEFAULT_IP; // your_current_IP
 
   private ProgressBar mProgressBar;
@@ -84,7 +84,8 @@ public class IndexActivity extends AbstractWeexActivity {
     }
 
     if (TextUtils.equals(sCurrentIp, DEFAULT_IP)) {
-      renderPage(WXFileUtils.loadAsset("landing.weex.js", this), getIndexUrl());
+      renderPage(WXFileUtils.loadAsset("vue/index.js", this), getIndexUrl());
+//      renderPageByURL("http://dotwe.org/raw/dist/2bbe1860da4669a68595c1aed01d7fd2.bundle.wx");
     } else {
       renderPageByURL(getIndexUrl());
     }
@@ -95,7 +96,7 @@ public class IndexActivity extends AbstractWeexActivity {
       public void onReceive(Context context, Intent intent) {
         createWeexInstance();
         if (TextUtils.equals(sCurrentIp, DEFAULT_IP)) {
-          renderPage(WXFileUtils.loadAsset("landing.weex.js", getApplicationContext()), getIndexUrl());
+          renderPage(WXFileUtils.loadAsset("vue/index.js", getApplicationContext()), getIndexUrl());
         } else {
           renderPageByURL(getIndexUrl());
         }

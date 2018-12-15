@@ -18,6 +18,7 @@
  */
 package com.taobao.weex.ui.action;
 
+import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.WXSDKManager;
 import com.taobao.weex.ui.component.WXComponent;
 
@@ -25,11 +26,13 @@ public class GraphicActionLayout extends BasicGraphicAction {
 
   private final GraphicPosition mLayoutPosition;
   private final GraphicSize mLayoutSize;
+  private final boolean mIsLayoutRTL;
 
-  public GraphicActionLayout(String pageId, String ref, GraphicPosition layoutPosition, GraphicSize layoutSize) {
-    super(pageId, ref);
+  public GraphicActionLayout(WXSDKInstance instance, String ref, GraphicPosition layoutPosition, GraphicSize layoutSize, boolean isRTL) {
+    super(instance, ref);
     this.mLayoutPosition = layoutPosition;
     this.mLayoutSize = layoutSize;
+    this.mIsLayoutRTL = isRTL;
   }
 
   @Override
@@ -39,8 +42,9 @@ public class GraphicActionLayout extends BasicGraphicAction {
       return;
     }
 
+    component.setIsLayoutRTL(mIsLayoutRTL);
     component.setDemission(mLayoutSize, mLayoutPosition);
-    component.setLayout(component);
+    component.setSafeLayout(component);
     component.setPadding(component.getPadding(), component.getBorder());
   }
 }

@@ -18,33 +18,38 @@
 
 set -e
 if [ ! -f scripts/build_from_source.sh ];then
-    echo "This script must execute in project root"
+    echo "This script must be executed from project root."
     exit 1
 fi
 
-echo "Build Weex SDK From Source...."
+echo "Build Weex SDK from source...."
 
 npm install
 npm run build:jsfm
 npm run build:polyfill
-npm run build:rax
+# npm run build:rax
 
 echo "Weex JS Framework build completed."
 sleep 2
 
-mkdir pre-build
-cp dist/weex-js-framework.min.js pre-build/native-bundle-main.js
-cp dist/weex-js-framework.min.js android_sdk/assets/native-bundle-main.js
-cp dist/weex-js-framework.min.js pre-build/weex-main-jsfm.js
-cp dist/weex-js-framework.min.js android_sdk/assets/weex-main-jsfm.js
+# Copy built JS resources to their destination.
+[ -d pre-build ] || mkdir pre-build
+cp dist/weex-js-framework.js pre-build/native-bundle-main.js
+cp dist/weex-js-framework.js android/sdk/assets/native-bundle-main.js
+cp dist/weex-js-framework.js pre-build/weex-main-jsfm.js
+cp dist/weex-js-framework.js android/sdk/assets/weex-main-jsfm.js
 cp dist/weex-polyfill.min.js pre-build/weex-polyfill.js
-cp dist/weex-rax.min.js pre-build/weex-rax-api.js
-cp dist/weex-rax.min.js android_sdk/assets/weex-rax-api.js
+# cp dist/weex-rax.min.js pre-build/weex-rax-api.js
+# cp dist/weex-rax.min.js android/sdk/assets/weex-rax-api.js
 
-gradle wrapper --gradle-version 4.4
-echo 'include ":android_sdk"'>settings.gradle
-./gradlew :android_sdk:assemble -PasfRelease
+# Build android_sdk
+cd android
+#./gradlew wrapper --gradle-version 4.4
+##echo 'include ":android_scddk"'>settings.gradle
+./gradlew :weex_sdk:assemble
+cd ..
 
-xcodebuild -project ios_sdk/WeexSDK.xcodeproj -target WeexSDK_MTL
+# Build iOS sdk
+# xcodebuild -project ios_sdk/WeexSDK.xcodeproj -scheme WeexSDK_MTL
 
 echo "Weex SDK Build completed."

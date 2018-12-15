@@ -23,7 +23,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -40,6 +39,7 @@ import com.taobao.weex.ui.view.gesture.WXGestureObservable;
 import com.taobao.weex.utils.WXExceptionUtils;
 import com.taobao.weex.utils.WXLogUtils;
 import com.taobao.weex.utils.WXViewUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +64,11 @@ public class WXFrameLayout extends FrameLayout implements WXGestureObservable,IR
   @Override
   public void registerGestureListener(WXGesture wxGesture) {
     this.wxGesture = wxGesture;
+  }
+
+  @Override
+  public WXGesture getGestureListener() {
+    return wxGesture;
   }
 
   @Override
@@ -112,7 +117,13 @@ public class WXFrameLayout extends FrameLayout implements WXGestureObservable,IR
     } catch (Throwable e) {
       if (getComponent() != null) {
         notifyLayerOverFlow();
-        reportLayerOverFlowError();
+        if (null != getComponent()){
+          WXSDKInstance instance = WXSDKManager.getInstance().getSDKInstance(getComponent().getInstanceId());
+          if (null != instance && null != instance.getApmForInstance() &&!instance.getApmForInstance().hasReportLayerOverDraw){
+            instance.getApmForInstance().hasReportLayerOverDraw = true;
+            reportLayerOverFlowError();
+          }
+        }
       }
       WXLogUtils.e("Layer overflow limit error", WXLogUtils.getStackTrace(e));
     }
