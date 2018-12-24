@@ -4,7 +4,7 @@
            src="http://g.tbcdn.cn/ali-wireless-h5/res/0.0.6/toy.mp4"
            auto-play="true" :playStatus="playStatus">
     </video>
-    <div style="flex-direction: row; justify-content: center;">
+    <div class="operator-area">
       <button value="Pause" @click.native="pause"></button>
       <button value="Play" @click.native="play" type="primary" style="margin-left:20px;"></button>
     </div>
@@ -17,14 +17,20 @@
     height: 460px;
     margin-bottom: 80px;
   }
+
+  .operator-area {
+    flex-direction: row;
+    justify-content: center;
+  }
 </style>
 
 <script>
-  var modal = weex.requireModule('modal')
-  module.exports = {
+  var modal = weex.requireModule('modal');
+
+  export default {
     data: function () {
       return {
-        playStatus: 'play'
+        playStatus: 'pause'
       }
     },
     components: {
