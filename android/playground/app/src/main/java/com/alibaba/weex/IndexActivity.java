@@ -53,7 +53,7 @@ public class IndexActivity extends AbstractWeexActivity {
   private static final String TAG = "IndexActivity";
   private static final int CAMERA_PERMISSION_REQUEST_CODE = 0x1;
   private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 0x2;
-  private static final String DEFAULT_IP = "localhost";
+  private static final String DEFAULT_IP = "10.240.236.228";
   private static String sCurrentIp = DEFAULT_IP; // your_current_IP
 
   private ProgressBar mProgressBar;
@@ -106,7 +106,7 @@ public class IndexActivity extends AbstractWeexActivity {
 
     LocalBroadcastManager.getInstance(this).registerReceiver(mReloadReceiver, new IntentFilter(WXSDKEngine.JS_FRAMEWORK_RELOAD));
 
-    CheckForUpdateUtil.checkForUpdate(this);
+//    CheckForUpdateUtil.checkForUpdate(this);
   }
 
   @Override

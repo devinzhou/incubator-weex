@@ -23,6 +23,9 @@
 
 <script>
   var storage = weex.requireModule('storage')
+
+  var timer = weex.requireModule('timer')
+
   module.exports = {
     data: function () {
       return {
@@ -37,7 +40,7 @@
       panel: require('../include/panel.vue')
     },
     created: function() {
-      var me = this
+      let me = this;
 
       //setItem
       storage.setItem('foo','foo-value',function(e){
@@ -49,15 +52,17 @@
         me.setItemResult = me.setItemResult + 'bar:'+JSON.stringify(e)
       })
 
-      //getItem
-      storage.getItem('foo',function(e){
-        console.log('get foo result:'+JSON.stringify(e))
-        me.getItemResult = 'get foo,value is '+e.data+'\n'
-      })
-      storage.getItem('bar',function(e){
-        console.log('get bar result:'+JSON.stringify(e))
-        me.getItemResult += 'get bar,value is '+e.data
-      })
+      setTimeout(() => {
+        //getItem
+        storage.getItem('foo',function(e){
+          console.log('get foo result:'+JSON.stringify(e))
+          me.getItemResult = 'get foo,value is '+e.data+'\n'
+        })
+        storage.getItem('bar',function(e){
+          console.log('get bar result:'+JSON.stringify(e))
+          me.getItemResult += 'get bar,value is '+e.data
+        })
+      },2000);
 
       //length
       storage.length(function(e){
@@ -72,11 +77,17 @@
         //me.getAllKeysResult +=' '+ typeof e.data
       })
 
-      //removeItem
-      storage.removeItem('foo',function(e){
-        console.log('remove foo:'+JSON.stringify(e))
-        me.removeItemResult = 'remove item foo '+e.result
-      })
+      let actionForRemove = () => {
+        //removeItem
+        storage.removeItem('foo',function(e){
+          console.log('remove foo:'+JSON.stringify(e))
+          me.removeItemResult = 'remove item foo '+ JSON.stringify(e)
+        })
+      };
+
+      timer.setTimeout( actionForRemove, 3000);
+
+      timer.clearTimeout(actionForRemove);
     }
   }
 </script>

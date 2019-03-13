@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel title="Transform" type="primary">
+    <panel title="Transform-test" type="primary">
       <button value="Rotate" @click.native="rotate" type="primary" size="middle"></button>
       <button value="Scale" @click.native="scale" type="primary" size="middle" style="margin-top:12px;"></button>
       <button value="Translate" @click.native="translate" type="primary" size="middle"
@@ -9,7 +9,7 @@
                  style="margin-top:12px;"></button>
     </panel>
 
-    <panel title="Others" type="primary">
+    <panel title="Others- hello " type="primary">
       <button value="BgColor" @click.native="color" type="primary" size="middle"></button>
       <button value="Opacity" @click.native="opacity" type="primary" size="middle"
                  style="margin-top:12px;"></button>

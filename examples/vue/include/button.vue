@@ -11,6 +11,9 @@
       type: { default: 'default' },
       size: { default: 'large' },
       value: { default: '' }
+    },
+    beforeMount: function () {
+      console.log('in button: beforeMount :' + this);
     }
   }
 </script>

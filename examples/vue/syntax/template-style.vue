@@ -12,6 +12,7 @@
 <script>
   module.exports = {
     data: function () {
+      debugger
       return {
         size: 32,
         color: '#ff0000'
