@@ -310,3 +310,4 @@ exports.destroyInstance = destroyInstance;
 exports.refreshInstance = refreshInstance;
 exports.getRoot = getRoot;
 exports.receiveTasks = receiveTasks;
+//# sourceMappingURL=index.js.map

@@ -25,7 +25,13 @@ var bannerExcludeFiles = [];
 var webSrcDirectory = path.join(__dirname, '../test/build-web/web-entry');
 
 function getEntryFileContent (entryPath, vueFilePath) {
-  const relativePath = path.relative(path.join(entryPath, '../'), vueFilePath);
+
+  var relativePath = path.relative(path.join(entryPath, '../'), vueFilePath);
+
+    // linux DO NOT HAVE \
+  relativePath = relativePath.replace(/\\/ig, "/");
+
+  console.log(relativePath);
   return 'var App = require(\'' + relativePath + '\')\n'
     + 'App.el = \'#root\'\n'
     + 'new Vue(App)\n'
@@ -64,7 +70,7 @@ var bannerPlugin = new webpack.BannerPlugin(banner, {
 module.exports = {
   entry: entry,
   // entry: {
-    // 'examples/build/web/vue-bundle': path.resolve('examples/vue', 'entry.js')
+  //    'examples/build/web/vue-bundle': path.resolve('examples/vue', 'entry.js')
   // },
   output: {
     path: '.',

@@ -26,8 +26,14 @@ var bannerExcludeFiles = [];
 var webSrcDirectory = path.join(__dirname, '../examples/web-entry');
 
 function getEntryFileContent (entryPath, vueFilePath) {
-  const relativePath = path.relative(path.join(entryPath, '../'), vueFilePath);
-  return 'var App = require(\'' + relativePath + '\')\n'
+  var relativePath = path.relative(path.join(entryPath, '../'), vueFilePath);
+
+  // linux DO NOT HAVE \
+  relativePath = relativePath.replace(/\\/ig, "/");
+
+  console.log(relativePath);
+
+    return 'var App = require(\'' + relativePath + '\')\n'
     + 'App.el = \'#root\'\n'
     + 'new Vue(App)\n'
 }
@@ -95,5 +101,6 @@ module.exports = {
       }
     ],
   },
-  plugins: [bannerPlugin]
+  plugins: [bannerPlugin],
+  watch:true
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 cd ../android/sdk
 gradle compileDebugSources
 cd ..
